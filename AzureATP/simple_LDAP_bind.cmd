@@ -1,0 +1,1 @@
+ldifde -a "cn=kjetil nordlund,ou=users,ou=northgrove,dc=northgrove,dc=no" * -s 192.168.0.18 -f export.ldf
