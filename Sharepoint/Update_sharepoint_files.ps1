@@ -3,19 +3,21 @@
 
 #Disclaimer: This script come as is, use at own risk
 #Created by: Kjetil Nordlund @ Microsoft.com
-#Date: last change 25.06.19
-#Description: Sccript to check timestamp on files in local directory with timestamp on files with same name in a sharepoint online library.
+#Date: last change 15.09.19
+#Description: Script to check timestamp on files in local directory with timestamp on files with same name in a sharepoint online library.
 #Description: Upload file if timestamp missmatch.
 
 # Some variables
 $diretory = "c:\temp\spfiles\*"
 $files = get-item $diretory
-$SPfiles =  Get-PnPFolderItem -FolderSiteRelativeUrl "Shared Documents" -ItemType File
 $splibrary = "https://msgrove.sharepoint.com/sites/demofiles/"
 $credentials = Get-Credential
 
+# connect to SP library
 Connect-PnPOnline -Url $splibrary -CreateDrive -Credentials $credentials 
 
+# list files on SP library after sucessfull connect
+$SPfiles =  Get-PnPFolderItem -FolderSiteRelativeUrl "Shared Documents" -ItemType File
 
 
 # the loop to check timestamp and upload files
