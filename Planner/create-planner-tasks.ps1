@@ -49,12 +49,13 @@ Connect-Planner -Credential $userCred
 ## Opprette team
 if (Get-Team -DisplayName $teamsname) {
     $team = Get-Team -DisplayName $teamsname
-    Write-host "Team eksisterer"
+    Write-host "Team exist"
 }
 else {
 
     $team = New-Team -DisplayName $teamsname
-    write-host "opprettet nytt team"
+    write-host "Created new team"
+    start-sleep 5
 }
 
 #### legger til medlemmer fra excel ark
@@ -64,7 +65,7 @@ foreach ($bruker in $xlsimport)
     $brukere.Add($bruker) | Out-Null
 
 }
-$unikebrukere = $brukere.ansvarlig | select -Unique
+$unikebrukere = $brukere.ansvarlig | Select-Object -Unique
 
 foreach ($unikbruker in $unikebrukere)
 {
@@ -80,16 +81,14 @@ foreach ($unikbruker in $unikebrukere)
 
 
 ## Lag en ny Planner plan
-if (Get-PlannerPlansList -GroupName @plannerlistname) {
-    
-    $plannerplan = Get-PlannerPlansList -GroupName $plannerlistname
-    write-host "Planner Tavle finnes allerede"
-}
-else {
-
+if (Get-PlannerPlansList -GroupName $teamsname){
+    $plannerplan = Get-PlannerPlansList -GroupName $teamsname
+    write-host "Planner plan already exist"
+} else {
     $plannerplan = New-PlannerPlanToGroup -GroupID $team.GroupId -PlanName $plannerlistname
-    write-host "opprettet ny planner tavle"
-
+    write-host "created new planner plan"
+    start-sleep 5
+    $plannerplan = $plannerplan = Get-PlannerPlansList -GroupName $teamsname
 }
 
 
@@ -115,7 +114,7 @@ foreach ($unikkategori in $unikekategorier)
 {
     if (!($existingBuckets.name -contains $unikkategori)) {
         New-PlannerBucket -PlanID $plannerplan.id -BucketName $unikkategori
-        Write-host "Lagde bucket: " $unikkategori
+        Write-host "Created bucket: " $unikkategori
     }
 }
 
