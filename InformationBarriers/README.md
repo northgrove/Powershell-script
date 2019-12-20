@@ -13,7 +13,7 @@ Please follow this article:
 https://docs.microsoft.com/nb-no/microsoft-365/compliance/information-barriers-policies#prerequisites
 
 ### Create table to organise the different Organization Segments needed
-See attached XLSX: 
+See attached XLSX: https://github.com/northgrove/Powershell-script/blob/master/InformationBarriers/InfoBarriers-PowerShellGenerator-clean.xlsx
 
 |SegmentName | FilterAttribute | FilterOperator | FilterAttributeValue |
 |------------|-----------------|----------------|----------------------|

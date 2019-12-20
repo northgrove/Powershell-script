@@ -41,7 +41,7 @@ $domain = ($orgDetails.VerifiedDomains | where _Default -EQ True).Name
 
 
 #Import Excel sheet with Information Barriers policies-
-$xlsimport = Import-XLSX "C:\Users\kjnordlu\OneDrive - Microsoft\Dokumenter\Bergen Kommune\InfoBarriers-PowerShellGenerator-BergenKommune-clean.xlsx"
+$xlsimport = Import-XLSX ".\InfoBarriers-PowerShellGenerator-clean.xlsx"
 
 # Create Organization Segments
 foreach ($segment in $xlsimport)
