@@ -12,12 +12,6 @@ $XlsxConfigDoc = "InfoBarriers-PowerShellGenerator-clean.xlsx"
 $domain = $null
 
 
-
-if (!(get-module az)) {
-    Install-Module -Name Az -AllowClobber -Scope CurrentUser
-    import-module az
-    }
-
 #get credentials
 $UserCredential = Get-Credential
 
@@ -27,6 +21,12 @@ $UserCredential = Get-Credential
 
 #Only needed to run once. Uncomment below for first time run.
 <## 
+if (!(get-module az)) {
+    Install-Module -Name Az -AllowClobber -Scope CurrentUser
+    import-module az
+}
+
+Login-AzAccount -credential $UserCredential
 
 $appId="bcf62038-e005-436d-b970-2a472f8c1982" 
 $sp=Get-AzADServicePrincipal -ServicePrincipalName $appId
@@ -75,30 +75,30 @@ if (test-path policies.json) {
 # Create Organization Segments
 foreach ($segment in $segments)
 {
-
-
     if ($segment.SegmentName -ne $null) {
         write-host $segment.SegmentName
         $filter = "$($segment.FilterAttribute)" + " " + "$($segment.FilterOperator)" + " " + "'$($segment.FilterAttributeValue)@$($domain)'"
         write-host $filter
-        #New-OrganizationSegment -Name $segment.SegmentName -UserGroupFilter "$filter"
+        New-OrganizationSegment -Name $segment.SegmentName -UserGroupFilter "$filter"
 
     }
 }
 
 
 # Create Block Policies
-foreach ($policy in $policies)
-{
+foreach ($policy in $policies) {
     if ($policy.AssignedSegment -ne $null) {
-        #write-host $policy.AssignedSegment
-        #New-InformationBarrierPolicy -Name "$($policy.AssignedSegment)-block-$($policy.BlockedSegment)" -AssignedSegment "$($policy.AssignedSegment)" -SegmentsBlocked "$($policy.BlockedSegment)" -State Active
+        write-host $policy.AssignedSegment
+        $arrayBlockSegments = $policy.BlockedSegment.split(",").replace(" ","")
+        New-InformationBarrierPolicy -Name "$($policy.AssignedSegment)-block" -AssignedSegment $policy.AssignedSegment -SegmentsBlocked $arrayBlockSegments -State Active
 
-
-    }
-    
+    }  
 }
 
+
+
+#apply the Policies
+Start-InformationBarrierPoliciesApplication
 
 
 
@@ -111,8 +111,9 @@ Import-PSSession $Session -DisableNameChecking
 foreach ($EXOpolicy in $policies) {
     #write-host $EXOpolicy.AssignedSegment
     $fromGroupName = ($segments | where {$_.SegmentName -eq $EXOpolicy.AssignedSegment}).FilterAttributevalue
-    $toGroupName = ($policies | where {$_.AssignedSegment -eq $EXOpolicy.AssignedSegment}).BlockedSegment
-    New-TransportRule "Block from Administration to Students" -BetweenMemberOf1 $fromGroupName -BetweenMemberOf2 $toGroupName -RejectMessageReasonText "Du har ikke lov til å sende epost eller chatte med denne mottakeren. Hendelsen er logget." 
+    $toGroupName = ($segments | where {$EXOpolicy.BlockedSegment -match $_.SegmentName}).FilterAttributeValue
+    New-TransportRule "Block-$fromGroupName" -BetweenMemberOf1 $fromGroupName -BetweenMemberOf2 $toGroupName -RejectMessageReasonText "Du har ikke lov til å sende epost eller chatte med denne mottakeren. Hendelsen er logget." 
+    #write-host $fromgroupname, $toGroupName
 }
 
 
