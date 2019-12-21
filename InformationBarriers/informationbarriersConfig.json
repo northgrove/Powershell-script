@@ -1,0 +1,48 @@
+{
+  "Segments": [
+    {"name": "administrasjon",
+      "FilterAttribute": "MemberOf",
+      "Operator": "-EQ",
+      "FilterAttributeValue": "ib-administrasjon"
+    },
+    {"name": "elever-skole1",
+      "FilterAttribute": "MemberOf",
+      "Operator": "-EQ",
+      "FilterAttributeValue": "ib-elever-skole1"
+    },
+    {"name": "lerere-skole1",
+      "FilterAttribute": "MemberOf",
+      "Operator": "-EQ",
+      "FilterAttributeValue": "ib-lerere-skole1"
+    },
+    {"name": "elever-skole2",
+      "FilterAttribute": "MemberOf",
+      "Operator": "-EQ",
+      "FilterAttributeValue": "ib-elever-skole2"
+    },
+    {"name": "lerere-skole2",
+      "FilterAttribute": "MemberOf",
+      "Operator": "-EQ",
+      "FilterAttributeValue": "ib-lerere-skole2"
+    }
+  ],
+  "Policies": [
+    { "name": "administrasjon-block-elever",
+      "segment": "administrasjon",
+      "Block": ["elever-skole1","elever-skole2"]
+    },
+    {"name": "elever1-block-administrasjon",
+      "segment":"elever-skole1",
+      "Block": "administrasjon"
+    },
+    {"name": "elever2-block-administrasjon",
+      "segment": "elever-skole2",
+      "Block": "administrasjon"
+    }
+  ]
+}
+
+
+
+
+

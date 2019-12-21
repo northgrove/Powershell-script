@@ -9,11 +9,11 @@ In Norway there are govermental reglements that restricts teachers or other empl
 
 ### Prerequesites
 
-Please follow this article:
-https://docs.microsoft.com/nb-no/microsoft-365/compliance/information-barriers-policies#prerequisites
+Please follow this article: [Information Barriers prerequisites](https://docs.microsoft.com/nb-no/microsoft-365/compliance/information-barriers-policies#prerequisites)
 
 ### Create table to organise the different Organization Segments needed
-See attached XLSX: https://github.com/northgrove/Powershell-script/blob/master/InformationBarriers/InfoBarriers-PowerShellGenerator-clean.xlsx
+this can ether be done by editing the attached XLSX [InfoBarriers-PowerShellGenerator-clean.xlsx](https://github.com/northgrove/Powershell-script/blob/master/InformationBarriers/InfoBarriers-PowerShellGenerator-clean.xlsx)
+or by creating segments.json and policies.json direct. Depending on your preferences. The XLSX sheet will be convertet to JSON dough.  
 
 |SegmentName | FilterAttribute | FilterOperator | FilterAttributeValue |
 |------------|-----------------|----------------|----------------------|
@@ -24,22 +24,22 @@ See attached XLSX: https://github.com/northgrove/Powershell-script/blob/master/I
 |elever-skole2|	memberof|-eq|ib-elever-skole2|
 
 **SegmentName:** The *name* of the segment to be created  
-**FilterAttribute:** The userobject attribute you want to filter users on to be included in the organisation segment  
+**FilterAttribute:** The userobject attribute you want to filter users on to be included in the organisation segment (list over possible attributes: [Information Barriers attributes](https://docs.microsoft.com/en-us/microsoft-365/compliance/information-barriers-attributes#reference) )  
 **FilterOperator:** equal (-eq) or not equal (-neq)  
 **FilterAttributeValue:** The value the attribute should have to be included  
   
 
-| AssignedSegment | BlockedSegment |
-|-----------------|----------------|
-| administrasjon | elever-skole1|
-|administrasjon|elever-skole2|
-|elever-skole1|administrasjon|
-|elever-skole2|administrasjon|
-|lerere-skole2|elever-skole1|
+| AssignedSegment | BlockedSegment | AllowedSegment |
+|-----------------|----------------|----------------|
+| administrasjon | elever-skole1, elever-skole2||
+|elever-skole1|administrasjon, lerere-skole2||
+|elever-skole2|administrasjon, lerere-skole1||
+|lerere-skole2|elever-skole1||
+|lerere-skole1|elever-skole2||
 
 **AssignedSegment:** Name of the segment to create a policy for  
 **BlockedSegment:** Name of the segment that *AssignedSegment* should be blocked to contact  
-
+**AllowedSegment:** Name of the segment that *AssignedSegment* should be allowed to contact (if needed)
 
 ### Run the Powershell script
 
@@ -47,11 +47,11 @@ See attached XLSX: https://github.com/northgrove/Powershell-script/blob/master/I
 > **module documentation:** https://docs.microsoft.com/nb-no/powershell/azure/install-az-ps?view=azps-3.2.0&viewFallbackFrom=azps-2.3.2  
 > **Disclaimer:** This script come as is, use at own risk  
 > **Created by:** Kjetil Nordlund @ Microsoft.com  
-> **Date:** last change 19.12.19  
+> **Date:** last change 19.12.19    
 > **Description:** script to implement Information Barriers in Office365/Teams  
 
 
-**Powershell script:** https://github.com/northgrove/Powershell-script/blob/master/InformationBarriers/InformationBarriersSetup.ps1
+**Powershell script:** [InformationBarriersSetup.ps1](https://github.com/northgrove/Powershell-script/blob/master/InformationBarriers/InformationBarriersSetup.ps1)
 
 
 

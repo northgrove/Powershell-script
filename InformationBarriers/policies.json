@@ -1,0 +1,27 @@
+[
+    {
+        "AssignedSegment":  "administrasjon",
+        "BlockedSegment":  "elever-skole1, elever-skole2",
+        "AllowedSegements":  null
+    },
+    {
+        "AssignedSegment":  "elever-skole1",
+        "BlockedSegment":  "administrasjon, lerere-skole2",
+        "AllowedSegements":  null
+    },
+    {
+        "AssignedSegment":  "elever-skole2",
+        "BlockedSegment":  "administrasjon, lerere-skole1",
+        "AllowedSegements":  null
+    },
+    {
+        "AssignedSegment":  "lerere-skole2",
+        "BlockedSegment":  "elever-skole1",
+        "AllowedSegements":  null
+    },
+    {
+        "AssignedSegment":  "lerere-skole1",
+        "BlockedSegment":  "elever-skole2",
+        "AllowedSegements":  null
+    }
+]
