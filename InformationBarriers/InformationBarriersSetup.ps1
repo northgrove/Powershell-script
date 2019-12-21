@@ -49,7 +49,7 @@ if ($domain -eq $null) {
 }
 
 
-# Create JSON from XLSX - organizationsegments
+# Create JSON from XLSX - organizationsegments - Thanks to https://github.com/chrisbrownie for Convert-ExcelSheetToJson.ps1
 if (test-path $XlsxConfigDoc) {
     .\Convert-ExcelSheetToJson.ps1 -InputFile InformationBarriers\$XlsxConfigDoc -SheetName organizationsegments -OutputFileName .\InformationBarriers\segments.json
     # Create JSON from XLSX - policies
