@@ -28,7 +28,7 @@ or by creating segments.json and policies.json direct. Depending on your prefere
 **FilterOperator:** equal (-eq) or not equal (-neq)  
 **FilterAttributeValue:** The value the attribute should have to be included  
   
-
+### Create table to define the policies applied to the different segments
 | AssignedSegment | BlockedSegment | AllowedSegment |
 |-----------------|----------------|----------------|
 | administrasjon | elever-skole1, elever-skole2||
@@ -41,7 +41,12 @@ or by creating segments.json and policies.json direct. Depending on your prefere
 **BlockedSegment:** Name of the segment that *AssignedSegment* should be blocked to contact  
 **AllowedSegment:** Name of the segment that *AssignedSegment* should be allowed to contact (if needed)
 
-### Run the Powershell script
+## Exchange Online mail flow rules
+The powershell script will also create Exchange Online Mail Flow Rules to restrict defined segments from sending mail between each other. According to the policy definition created abow.  
+The email sender will receive a response that the email is blocked and that the action is logged.  
+
+
+## Run the Powershell script
 
 > **module requirements:** Install-Module -Name Az  
 > **module documentation:** https://docs.microsoft.com/nb-no/powershell/azure/install-az-ps?view=azps-3.2.0&viewFallbackFrom=azps-2.3.2  
@@ -49,9 +54,9 @@ or by creating segments.json and policies.json direct. Depending on your prefere
 > **Created by:** Kjetil Nordlund @ Microsoft.com  
 > **Date:** last change 19.12.19    
 > **Description:** script to implement Information Barriers in Office365/Teams  
+  
+Clone this repo and run the ***.\InformationBarriers\InformationBarriersSetup.ps1*** script. After Editing the XLSX sheet (or .json files direct - in that case delete the XLSX)
 
-
-**Powershell script:** [InformationBarriersSetup.ps1](https://github.com/northgrove/Powershell-script/blob/master/InformationBarriers/InformationBarriersSetup.ps1)
 
 
 
