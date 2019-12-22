@@ -55,7 +55,34 @@ The email sender will receive a response that the email is blocked and that the 
 > **Date:** last change 19.12.19    
 > **Description:** script to implement Information Barriers in Office365/Teams  
   
-Clone this repo and run the ***.\InformationBarriers\InformationBarriersSetup.ps1*** script. After Editing the XLSX sheet (or .json files direct - in that case delete the XLSX)
+Clone this repo and run the ***.\InformationBarriers\InformationBarriersSetup.ps1*** script. After Editing the XLSX sheet (or .json files direct - in that case delete the XLSX)  
+
+<br /><br />
+  
+*****
+# Use Microsoft Cloud App Security to detect and remove sharing of files
+Wth the above configuration emails with information that a file is shared with reciver will be blocked by the exchange mail flow rules and never reach the receiver. In addition you can use Microsoft Cloud App Protection to detect that a file is shared with someone it should not, alarm about that and remove the sharing.  
+
+Example policy in MCAS:  
+
+> Type: File Policy  
+> Policy name: IB-blokk deling fra administrasjon til elever  
+> Policy Severity: Medium  
+> Category: Sharing Control  
+> Create a filter for the files this policy will act on: 
+> + Files matching all of the following:
+>   - Access Level - equals - public(internet), public, external, internal  
+>   - Collaborators - groups - contains - ib-elever-skole1, ib-elever-skole2  
+>
+> Select user group: ib-administrasjon  (the group need to be synced to MCAS to apare in the list)  
+> Alerts: Create Alert for each matching file  
+> Governance Actions:
+> + Microsoft OneDrive for business:
+>   - Make private
+> + Microsoft Sharepoint Online:
+>   - Make private  
+
+  
 
 
 
