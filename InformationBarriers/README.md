@@ -82,7 +82,8 @@ Example policy in MCAS:
 > + Microsoft Sharepoint Online:
 >   - Make private  
 
-  
+
+![MCAS Policy](https://github.com/northgrove/Powershell-script/blob/master/InformationBarriers/img/MCAS-policy.png)
 
 
 
