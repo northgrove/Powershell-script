@@ -83,6 +83,7 @@ Example policy in MCAS:
 >   - Make private  
 
 
+Example Policy View in MCAS:  
 ![MCAS Policy](https://github.com/northgrove/Powershell-script/blob/master/InformationBarriers/img/MCAS-policy.png)
 
 
