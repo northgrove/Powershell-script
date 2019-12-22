@@ -61,7 +61,7 @@ Clone this repo and run the ***.\InformationBarriers\InformationBarriersSetup.ps
   
 *****
 # Use Microsoft Cloud App Security to detect and remove sharing of files
-Wth the above configuration emails with information that a file is shared with reciver will be blocked by the exchange mail flow rules and never reach the receiver. In addition you can use Microsoft Cloud App Protection to detect that a file is shared with someone it should not, alarm about that and remove the sharing.  
+Wth the above configuration emails with information that a file is shared with a recipient will be blocked by the exchange mail flow rules and never reach the receiver. In addition you can use Microsoft Cloud App Protection to detect that a file is shared with someone it should not, alarm about it and remove the sharing.  
 
 Example policy in MCAS:  
 
