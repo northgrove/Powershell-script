@@ -60,7 +60,7 @@ foreach ($item in $data.results) {
         }
         $jsonbody = $body | ConvertTo-Json
 
-        Invoke-RestMethod -uri $defenderURI -Method $ActionMetod -body $jsonbody -Headers @{"Authorization" = "Bearer $accesstoken"} -ContentType "application/json" -ErrorAction stop
+        $callaip = Invoke-RestMethod -uri $defenderURI -Method $ActionMetod -body $jsonbody -Headers @{"Authorization" = "Bearer $accesstoken"} -ContentType "application/json" -ErrorAction stop
         
         write-host "wrote $($item.indicator)"
     }

@@ -1,0 +1,6 @@
+{
+    "AVapikey":"AlienVaultAPIkey",
+    "clientid":"AzureAD Application ID",
+    "clientSecret":"Azure AD Application Secret",
+    "tenantid":"Azure AD Tenant ID"
+}
