@@ -11,7 +11,7 @@ Denne artikkelen vil beskrive hvordan Information Barriers og Data Loss Preventi
 Følg denne artikkelen for å etablere nødvendige prerequesites: [Information Barriers prerequisites](https://docs.microsoft.com/nb-no/microsoft-365/compliance/information-barriers-policies#prerequisites)
 
 ### Lag oversikt over de forskjellige brukerindelingene som er nødvendig
-Dette kan enten gjøres ved hjelpe av vedlagt Excel ark: [InfoBarriers-PowerShellGenerator-clean.xlsx](https://github.com/northgrove/Powershell-script/blob/master/InformationBarriers/InfoBarriers-PowerShellGenerator-clean.xlsx)
+Dette kan enten gjøres ved hjelp av vedlagt Excel ark: [InfoBarriers-PowerShellGenerator-clean.xlsx](https://github.com/northgrove/Powershell-script/blob/master/InformationBarriers/InfoBarriers-PowerShellGenerator-clean.xlsx)
 eller ved å editere segments.json og policies.json direkte. Avhengig av hva man finner enklest. Excelarket vil dog uansett bli konvertert til JSON.  
 
 Eksempel tabell over organisasjonssegmenter:
