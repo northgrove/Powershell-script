@@ -16,6 +16,7 @@ Dette kan enten gjøres ved hjelpe av vedlagt Excel ark: [InfoBarriers-PowerShel
 eller ved å editere segments.json og policies.json direkte. Avhengig av hva man finner enklest. Excelarket vil dog uansett bli konvertert til JSON.  
 
 Eksempel tabell over organisasjonssegmenter:
+
 |SegmentName | FilterAttribute | FilterOperator | FilterAttributeValue |
 |------------|-----------------|----------------|----------------------|
 |lerere-skole1| memberof|-eq| ib-lerere-skole1 |
