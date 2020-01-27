@@ -61,7 +61,6 @@ Clone dette github repo'et, editer excelarket med tilpassede segmenter og policy
 <br /><br />
   
 *****
-# Use Microsoft Cloud App Security to detect and remove sharing of files
 # Bruk av Microsoft Cloud App Security for å detektere og fjerne deling av filer
 For å komplettere en issolering av brukergrupper kan Microsoft Cloud App Security benyttes for å detektere, alarmere og eventuelt fjerne deling av filer mellom brukergruppene. 
 
