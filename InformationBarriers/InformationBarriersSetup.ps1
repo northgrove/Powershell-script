@@ -10,6 +10,7 @@
 # Needed variables:
 $XlsxConfigDoc = "InfoBarriers-PowerShellGenerator-clean.xlsx"
 $domain = $null
+$emailRejectmsgText = "Du har ikke lov til å sende epost eller chatte med denne mottakeren. Hendelsen er logget."
 
 
 #get credentials
@@ -112,11 +113,9 @@ Import-PSSession $Session -DisableNameChecking
 
 #create mail flow rules
 foreach ($EXOpolicy in $policies) {
-    #write-host $EXOpolicy.AssignedSegment
     $fromGroupName = ($segments | where {$_.SegmentName -eq $EXOpolicy.AssignedSegment}).FilterAttributevalue
     $toGroupName = ($segments | where {$EXOpolicy.BlockedSegment -match $_.SegmentName}).FilterAttributeValue
-    New-TransportRule "Block-$fromGroupName" -BetweenMemberOf1 $fromGroupName -BetweenMemberOf2 $toGroupName -RejectMessageReasonText "Du har ikke lov til å sende epost eller chatte med denne mottakeren. Hendelsen er logget." 
-    #write-host $fromgroupname, $toGroupName
+    New-TransportRule "Block-$fromGroupName" -BetweenMemberOf1 $fromGroupName -BetweenMemberOf2 $toGroupName -RejectMessageReasonText $emailRejectmsgText
 }
 
 
