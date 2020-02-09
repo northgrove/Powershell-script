@@ -20,3 +20,6 @@ foreach ($policy in $policies)
     Remove-InformationBarrierPolicy -Identity $policy.identity 
 
 }
+
+#Remove all organizationsegments
+Get-OrganizationSegment | Remove-OrganizationSegment

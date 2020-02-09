@@ -15,12 +15,14 @@ $domain = $null
 #get credentials
 $UserCredential = Get-Credential
 
-#Login-AzAccount -credential $UserCredential
 
 #Admin consent for information barriers in Microsoft Teams
 
 #Only needed to run once. Uncomment below for first time run.
 <## 
+
+Login-AzAccount -credential $UserCredential
+
 if (!(get-module az)) {
     Install-Module -Name Az -AllowClobber -Scope CurrentUser
     import-module az
@@ -39,21 +41,22 @@ Start-Process  "https://login.microsoftonline.com/common/adminconsent?client_id=
 #Connect to Office 365 Security & Compliance Center
 $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
 
-Import-PSSession $Session -DisableNameChecking
+Import-PSSession $Session -DisableNameChecking -AllowClobber
 
 #get default domain name
 if ($domain -eq $null) {
     connect-azuread -credential $UserCredential
     $orgDetails = Get-AzureADTenantDetail
     $domain = ($orgDetails.VerifiedDomains | where _Default -EQ True).Name
+    write-host "setting domain to: $domain"
 }
 
 
 # Create JSON from XLSX - organizationsegments - Thanks to https://github.com/chrisbrownie for Convert-ExcelSheetToJson.ps1
 if (test-path $XlsxConfigDoc) {
-    .\Convert-ExcelSheetToJson.ps1 -InputFile InformationBarriers\$XlsxConfigDoc -SheetName organizationsegments -OutputFileName .\InformationBarriers\segments.json
+    .\Convert-ExcelSheetToJson.ps1 -InputFile .\$XlsxConfigDoc -SheetName organizationsegments -OutputFileName .\segments.json
     # Create JSON from XLSX - policies
-    .\Convert-ExcelSheetToJson.ps1 -InputFile InformationBarriers\$XlsxConfigDoc -SheetName policies -OutputFileName .\InformationBarriers\policies.json
+    .\Convert-ExcelSheetToJson.ps1 -InputFile .\$XlsxConfigDoc -SheetName policies -OutputFileName .\policies.json
 } else {
     write-host "XLSX file dose not exist"
 }

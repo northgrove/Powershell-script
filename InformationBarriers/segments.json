@@ -1,31 +1,31 @@
 [
     {
         "SegmentName":  "lerere-skole1",
-        "FilterAttribute":  "memberof",
+        "FilterAttribute":  "MemberOf",
         "FilterOperator":  "-eq",
         "FilterAttributeValue":  "ib-lerere-skole1"
     },
     {
         "SegmentName":  "elever-skole1",
-        "FilterAttribute":  "memberof",
+        "FilterAttribute":  "MemberOf",
         "FilterOperator":  "-eq",
         "FilterAttributeValue":  "ib-elever-skole1"
     },
     {
         "SegmentName":  "Administrasjon",
-        "FilterAttribute":  "memberof",
+        "FilterAttribute":  "MemberOf",
         "FilterOperator":  "-eq",
         "FilterAttributeValue":  "ib-administrasjon"
     },
     {
         "SegmentName":  "lerere-skole2",
-        "FilterAttribute":  "memberof",
+        "FilterAttribute":  "MemberOf",
         "FilterOperator":  "-eq",
         "FilterAttributeValue":  "ib-lerere-skole2"
     },
     {
         "SegmentName":  "elever-skole2",
-        "FilterAttribute":  "memberof",
+        "FilterAttribute":  "MemberOf",
         "FilterOperator":  "-eq",
         "FilterAttributeValue":  "ib-elever-skole2"
     }
