@@ -28,3 +28,7 @@ Get-Mailbox -ResultSize unlimited | select name,addressbookpolicy,customattribut
 
 #Exit Exchange Online Session
 Remove-PSSession $Session
+
+
+# Filter for group membership: "MemberOfGroup -eq '$dn'"
+# New-GlobalAddressList -Name "Office365GAL" -RecipientFilter "MemberOfGroup -eq '$dn'"
