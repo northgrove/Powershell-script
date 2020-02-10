@@ -1,3 +1,9 @@
+#Disclaimer: This script come as is, use at own risk
+#Created by: Erik Christiansen @ Microsoft.com
+#Date: last change 10.02.20
+#Description: script exchange address book policies
+
+
 #Connect to Exchange Online
 $UserCredential = Get-Credential
 $Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
