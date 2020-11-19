@@ -4,13 +4,17 @@
 #Description: script to remove ALL infomration Barriers policies in the tenant
 
 #get credentials
-$UserCredential = Get-Credential
+#$UserCredential = Get-Credential
+$upn = read-host "enter UPN: "
 
 
 #Connect to Office 365 Security & Compliance Center
-$Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
+#$Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
+#Import-PSSession $Session -DisableNameChecking
 
-Import-PSSession $Session -DisableNameChecking
+#New connection method 18.11.20
+#Import-Module ExchangeOnlineManagement
+Connect-IPPSSession -UserPrincipalName $upn
 
 #remove information policies
 $policies = Get-InformationBarrierPolicy

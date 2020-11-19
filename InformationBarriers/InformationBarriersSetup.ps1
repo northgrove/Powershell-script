@@ -14,8 +14,8 @@ $emailRejectmsgText = "Du har ikke lov til å sende epost eller chatte med denne
 
 
 #get credentials
-$UserCredential = Get-Credential
-
+#$UserCredential = Get-Credential
+$upn = read-host "enter UPN: "
 
 #Admin consent for information barriers in Microsoft Teams
 
@@ -40,9 +40,13 @@ Start-Process  "https://login.microsoftonline.com/common/adminconsent?client_id=
 
 
 #Connect to Office 365 Security & Compliance Center
-$Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
+#$Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
+#Import-PSSession $Session -DisableNameChecking -AllowClobber
 
-Import-PSSession $Session -DisableNameChecking -AllowClobber
+#New connection method 18.11.20
+Import-Module ExchangeOnlineManagement
+Connect-IPPSSession -UserPrincipalName $upn
+
 
 #get default domain name
 if ($domain -eq $null) {
