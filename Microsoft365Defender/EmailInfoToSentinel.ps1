@@ -7,11 +7,8 @@
 # Getting config
 $config = Get-Content .\Microsoft365Defender\config.json | ConvertFrom-Json
 
-# Replace with your Workspace ID
+# Replace with your Workspace ID - and put APIkey in the config.json file
 $CustomerId = "d113b58f-342b-471d-ad0e-e41c4fc228b8"  
-
-# Replace with your Primary Key
-$SharedKey = get-content .\AzureLog_API\config
 
 # Specify the name of the record type that you'll be creating
 $LogType = "EmailEventsFromAPI"
@@ -29,6 +26,7 @@ $date = get-date -Format o
 $appID = $config.clientid 
 $appSecret = $config.clientSecret 
 $tenantid = $config.tenantid
+$SharedKey = $config.apikey
 $tokenAuthURI = "https://login.microsoftonline.com/msgrove.onmicrosoft.com/oauth2/token"
 
 # requesten for Access Token
@@ -63,7 +61,7 @@ Function Build-Signature ($customerId, $sharedKey, $date, $contentLength, $metho
 
 function Post-AdvancedQuery($accessToken)
 {
-    $query = 'EmailEvents | limit 2' # Paste your own query here
+    $query = 'EmailEvents | limit 10' # Paste your own query here
 
     $url = "https://api.security.microsoft.com/api/advancedhunting/run"
     $headers = @{ 
